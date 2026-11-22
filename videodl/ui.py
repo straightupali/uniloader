@@ -130,34 +130,34 @@ def label(parent, text="", size=13, weight="normal", muted=False, **kw):
 
 
 def primary(parent, text, command, height=38, size=13, **kw):
-    return ctk.CTkButton(parent, text=text, command=command, height=height, corner_radius=10,
+    return ctk.CTkButton(parent, text=text, command=command, height=height, corner_radius=6,
                          fg_color=C["accent"], hover_color=C["accent_h"], text_color="#FFFFFF",
                          font=font(size, "bold"), **kw)
 
 
 def ghost(parent, text, command, width=0, height=32, danger=False, border=True, **kw):
     return ctk.CTkButton(parent, text=text, command=command, width=width or 10, height=height,
-                         corner_radius=8, fg_color="transparent", hover_color=C["hover"],
+                         corner_radius=5, fg_color="transparent", hover_color=C["hover"],
                          border_width=1 if border else 0, border_color=C["border"],
                          text_color=C["bad"] if danger else C["text"], font=font(12), **kw)
 
 
 def entry(parent, placeholder="", width=200, height=38, **kw):
     return ctk.CTkEntry(parent, placeholder_text=placeholder, width=width, height=height,
-                        corner_radius=10, border_width=1, fg_color=C["field"], border_color=C["border"],
+                        corner_radius=6, border_width=1, fg_color=C["field"], border_color=C["border"],
                         text_color=C["text"], placeholder_text_color=C["muted"], font=font(13), **kw)
 
 
 def option(parent, values, command, width=150):
     return ctk.CTkOptionMenu(parent, values=values, command=command, width=width, height=34,
-                             corner_radius=8, fg_color=C["field"], button_color=C["field"],
+                             corner_radius=5, fg_color=C["field"], button_color=C["field"],
                              button_hover_color=C["hover"], text_color=C["text"],
                              dropdown_fg_color=C["card"], dropdown_hover_color=C["hover"],
                              dropdown_text_color=C["text"], font=font(13), dropdown_font=font(13))
 
 
-SWITCH_OFF = ("#B8BECB", "#3B404D")
-SWITCH_RING = ("#949CAD", "#3B404D")  # knob outline when off: a bit darker than the track, like a shadow
+SWITCH_OFF = ("#7C8499", "#3B404D")  # darker in light mode so the white knob stands out
+SWITCH_RING = SWITCH_OFF  # track edge matches the track, so the knob looks inset
 
 
 def switch(parent, var, command):
@@ -166,7 +166,7 @@ def switch(parent, var, command):
     accent = C["accent"]
     s = ctk.CTkSwitch(parent, text="", variable=var, command=command, width=48,
                       progress_color=accent, fg_color=SWITCH_OFF, button_color="#FFFFFF",
-                      button_hover_color="#F2F2F2", border_width=2,
+                      button_hover_color="#F2F2F2", border_width=3,
                       border_color=accent if var.get() else SWITCH_RING)
 
     def ring(*_):
@@ -179,7 +179,7 @@ def switch(parent, var, command):
 
 
 def card(parent, **kw):
-    return ctk.CTkFrame(parent, fg_color=C["card"], corner_radius=14, border_width=1,
+    return ctk.CTkFrame(parent, fg_color=C["card"], corner_radius=8, border_width=1,
                         border_color=C["border"], **kw)
 
 
@@ -486,7 +486,7 @@ class App(ctk.CTk):
 
         self.nav = {}
         for name, glyph in NAV:
-            b = ctk.CTkButton(side, text=f"   {glyph}    {name}", anchor="w", height=40, corner_radius=10,
+            b = ctk.CTkButton(side, text=f"   {glyph}    {name}", anchor="w", height=40, corner_radius=6,
                               fg_color="transparent", hover_color=C["hover"], text_color=C["text"],
                               font=font(13), command=lambda n=name: self.tabs.set(n))
             b.pack(fill="x", padx=12, pady=2)
@@ -570,7 +570,7 @@ class App(ctk.CTk):
         self.p_card.grid_columnconfigure(1, weight=1)
         self._blank = ctk.CTkImage(Image.new("RGBA", THUMB, (0, 0, 0, 0)), size=THUMB)
         self.thumb = ctk.CTkLabel(self.p_card, text="", image=self._blank, width=THUMB[0], height=THUMB[1],
-                                  fg_color=C["field"], corner_radius=10)
+                                  fg_color=C["field"], corner_radius=6)
         self.thumb.grid(row=0, column=0, rowspan=2, padx=14, pady=14)
         self.p_title = label(self.p_card, "", 15, "bold", wraplength=520)
         self.p_title.grid(row=0, column=1, sticky="sw", padx=(0, 16), pady=(16, 0))
@@ -585,7 +585,7 @@ class App(ctk.CTk):
         label(oc, "Quality", 12, muted=True).grid(row=0, column=1, sticky="w", padx=8, pady=(16, 6))
         self.fmt_seg = ctk.CTkSegmentedButton(
             oc, values=[f.split()[0] for f in FORMATS], command=self._format_changed, height=34,
-            corner_radius=8, font=font(13), fg_color=C["field"], selected_color=C["soft"],
+            corner_radius=5, font=font(13), fg_color=C["field"], selected_color=C["soft"],
             selected_hover_color=C["soft"], unselected_color=C["field"], unselected_hover_color=C["hover"],
             text_color=C["text"])
         fmt = config["format"] if config["format"] in FORMATS else FORMATS[0]
@@ -601,7 +601,7 @@ class App(ctk.CTk):
         fr = ctk.CTkFrame(oc, fg_color="transparent")
         fr.grid(row=3, column=0, columnspan=2, sticky="ew", padx=18)
         fr.grid_columnconfigure(0, weight=1)
-        self.folder_label = ctk.CTkLabel(fr, text="", anchor="w", height=34, corner_radius=8,
+        self.folder_label = ctk.CTkLabel(fr, text="", anchor="w", height=34, corner_radius=5,
                                          fg_color=C["field"], text_color=C["text"], font=font(13))
         self.folder_label.grid(row=0, column=0, sticky="ew")
         tip(self.folder_label, "folder")
@@ -1422,7 +1422,7 @@ def empty_state(parent, glyph, title, text):
 
 class JobRow(ctk.CTkFrame):
     def __init__(self, master, app, job):
-        super().__init__(master, fg_color=C["card"], corner_radius=14, border_width=1, border_color=C["border"])
+        super().__init__(master, fg_color=C["card"], corner_radius=8, border_width=1, border_color=C["border"])
         self.app, self.job = app, job
         self._state = self._btn_state = None
         self.grid_columnconfigure(0, weight=1)
@@ -1437,7 +1437,7 @@ class JobRow(ctk.CTkFrame):
         self.status.pack(side="left", padx=(6, 8))
         self.info = ctk.CTkLabel(line, text="", font=font(12), text_color=C["muted"], anchor="w", justify="left")
         self.info.pack(side="left", fill="x", expand=True)
-        self.bar = ctk.CTkProgressBar(self, height=5, corner_radius=3, fg_color=C["field"],
+        self.bar = ctk.CTkProgressBar(self, height=5, corner_radius=2, fg_color=C["field"],
                                       progress_color=C["accent"])
         self.bar.set(0)
         self.pad = ctk.CTkFrame(self, fg_color="transparent", height=14)
@@ -1487,7 +1487,7 @@ class JobRow(ctk.CTkFrame):
 
 class HistoryRow(ctk.CTkFrame):
     def __init__(self, master, app, e):
-        super().__init__(master, fg_color=C["card"], corner_radius=14, border_width=1, border_color=C["border"])
+        super().__init__(master, fg_color=C["card"], corner_radius=8, border_width=1, border_color=C["border"])
         self.grid_columnconfigure(0, weight=1)
         exists = bool(e.get("path")) and Path(e["path"]).exists()
         label(self, short(e["title"], 70), 13, "bold").grid(row=0, column=0, sticky="ew", padx=(18, 8), pady=(14, 0))
