@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Video Downloader button",
+  "name": "Uniloader button",
   "short_name": "Video DL",
   "version": "2.0",
-  "description": "One-click button that sends the page or a link to the Video Downloader desktop app.",
+  "description": "One-click button that sends the page or a link to the Uniloader desktop app.",
   "permissions": ["contextMenus", "activeTab"],
   "background": { "service_worker": "background.js" },
   "icons": {

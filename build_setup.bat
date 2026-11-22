@@ -1,9 +1,9 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-title Video Downloader - Build Setup.exe
+title Uniloader - Build Setup.exe
 echo ==========================================
-echo   Builds Output\VideoDownloader-Setup.exe
+echo   Builds Output\Uniloader-Setup.exe
 echo   (one-time, takes about 5 minutes)
 echo ==========================================
 echo.
@@ -19,13 +19,13 @@ build_env\Scripts\python -m pip install --upgrade --disable-pip-version-check pi
 build_env\Scripts\python -m pip install --upgrade --disable-pip-version-check -r requirements.txt pyinstaller || goto :fail
 
 echo [2/4] Packing the app with PyInstaller...
-build_env\Scripts\pyinstaller --noconfirm --clean --windowed --name VideoDownloader ^
-  --icon assets\VideoDownloader.ico --add-data "assets;assets" ^
+build_env\Scripts\pyinstaller --noconfirm --clean --windowed --name Uniloader ^
+  --icon assets\Uniloader.ico --add-data "assets;assets" ^
   --collect-data customtkinter --hidden-import pystray._win32 ytdl.py || goto :fail
 
 echo [3/4] Adding FFmpeg, Deno and the Chrome extension...
-powershell -NoProfile -ExecutionPolicy Bypass -File get_tools.ps1 -App "%cd%\dist\VideoDownloader" || goto :fail
-xcopy /E /I /Y chrome_extension "dist\VideoDownloader\chrome_extension" >nul
+powershell -NoProfile -ExecutionPolicy Bypass -File get_tools.ps1 -App "%cd%\dist\Uniloader" || goto :fail
+xcopy /E /I /Y chrome_extension "dist\Uniloader\chrome_extension" >nul
 
 echo [4/4] Making the installer with Inno Setup...
 call :find_iscc
@@ -38,7 +38,7 @@ if not defined ISCC ( echo Couldn't find Inno Setup. Install it from jrsoftware.
 "%ISCC%" setup.iss || goto :fail
 
 echo.
-echo Done! Your installer is: %cd%\Output\VideoDownloader-Setup.exe
+echo Done! Your installer is: %cd%\Output\Uniloader-Setup.exe
 echo You can copy it to any Windows PC. No Python needed there.
 pause
 exit /b 0

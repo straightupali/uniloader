@@ -7,7 +7,7 @@ from pathlib import Path
 from .paths import APP_DIR, FROZEN
 
 RUN_KEY = r"Software\Microsoft\Windows\CurrentVersion\Run"
-RUN_NAME = "VideoDownloader"
+RUN_NAME = "Uniloader"
 
 
 def open_path(p):

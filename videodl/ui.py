@@ -107,7 +107,7 @@ TIPS = {
             "clipboard pop-up keep working.",
     "autostart": "Start the app hidden in the tray when Windows starts.",
     "autoupdate": "Sites change often; this keeps the downloader working by updating yt-dlp once a day.",
-    "save_folder": "Change where downloads go, or reset to Downloads\\Video Downloader.",
+    "save_folder": "Change where downloads go, or reset to Downloads\\Uniloader.",
 }
 
 STATUS_STYLE = {  # status -> (dot colour, label)
@@ -369,7 +369,7 @@ class App(ctk.CTk):
         ctk.set_default_color_theme("blue")
         apply_theme(config.get("color_theme", "Indigo"))
         super().__init__(fg_color=C["bg"])
-        self.title("Video Downloader")
+        self.title("Uniloader")
         self.geometry("1020x700")
         self.minsize(900, 620)
         self._set_icon()
@@ -412,7 +412,7 @@ class App(ctk.CTk):
     # ================= plumbing =================
     def _set_icon(self):
         try:
-            ico = ASSETS / "VideoDownloader.ico"
+            ico = ASSETS / "Uniloader.ico"
             if os.name == "nt" and ico.exists():
                 # set it right away (so CustomTkinter never puts its own icon on the taskbar) and once more later
                 self.iconbitmap(str(ico), default=str(ico))
@@ -704,7 +704,7 @@ class App(ctk.CTk):
     def reset_folder(self):
         config.set("folder", str(DEFAULT_FOLDER))
         self._show_folder()
-        self.set_status("Save folder reset to Downloads\\Video Downloader")
+        self.set_status("Save folder reset to Downloads\\Uniloader")
 
     def open_folder(self):
         p = Path(config["folder"])
@@ -909,9 +909,9 @@ class App(ctk.CTk):
         self.nav["Queue"].configure(text="   ≡    Queue" + (f"   ({busy})" if busy else ""))
         if active:
             pct = sum(j.progress for j in active) / len(active) * 100
-            self.title(f"Video Downloader · {len(active)} downloading ({pct:.0f}%)")
+            self.title(f"Uniloader · {len(active)} downloading ({pct:.0f}%)")
         else:
-            self.title("Video Downloader")
+            self.title("Uniloader")
         self.after(400, self._refresh_queue)
 
     def _save_queue(self):
@@ -1036,7 +1036,7 @@ class App(ctk.CTk):
         about.grid_columnconfigure(1, weight=1)
         ctk.CTkLabel(about, text="", image=ctk.CTkImage(icon_image(128), size=(56, 56))).grid(
             row=0, column=0, rowspan=3, padx=18, pady=18)
-        label(about, "Video Downloader", 17, "bold").grid(row=0, column=1, sticky="sw", pady=(18, 0))
+        label(about, "Uniloader", 17, "bold").grid(row=0, column=1, sticky="sw", pady=(18, 0))
         label(about, f"Version {__version__}", 13).grid(row=1, column=1, sticky="w")
         self.ver_label = label(about, f"yt-dlp {updater.current_version()}", 12, muted=True)
         self.ver_label.grid(row=2, column=1, sticky="nw", pady=(0, 18))
@@ -1140,7 +1140,7 @@ class App(ctk.CTk):
         row(s, "Hover tips", "Show short explanations like this one", sw("tooltips"), "tooltips")
 
         s = section("Downloads")
-        row(s, "Save folder", "Reset goes back to Downloads\\Video Downloader",
+        row(s, "Save folder", "Reset goes back to Downloads\\Uniloader",
             buttons(("Change…", self.browse), ("Reset", self.reset_folder)), "save_folder")
 
         def tmpl(parent):

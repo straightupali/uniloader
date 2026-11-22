@@ -35,7 +35,7 @@ $ar = Join-Path $App 'aria2'
 if (-not (Test-Path (Join-Path $ar 'aria2c.exe'))) {
     try {
         Write-Host '      downloading aria2 (fast multi-connection downloads)...'
-        $rel = Invoke-RestMethod 'https://api.github.com/repos/aria2/aria2/releases/latest' -Headers @{ 'User-Agent' = 'VideoDownloader' }
+        $rel = Invoke-RestMethod 'https://api.github.com/repos/aria2/aria2/releases/latest' -Headers @{ 'User-Agent' = 'Uniloader' }
         $asset = $rel.assets | Where-Object { $_.name -like '*win-64bit*.zip' } | Select-Object -First 1
         $zip = Join-Path $env:TEMP 'vd-aria2.zip'
         $tmp = Join-Path $env:TEMP 'vd-aria2'

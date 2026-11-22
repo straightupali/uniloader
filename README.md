@@ -1,4 +1,4 @@
-# Video Downloader 2.3.2
+# Uniloader 2.3.2
 
 A Windows app for downloading video and audio from YouTube and 1,000+ other sites, built on yt-dlp.
 
@@ -6,7 +6,7 @@ A Windows app for downloading video and audio from YouTube and 1,000+ other site
 
 **Quick install:** double-click `install.bat`. It installs Python if needed, the app, FFmpeg, Deno (YouTube needs it) and aria2 (fast mode), plus Desktop/Start-menu shortcuts and the `ytdl://` link used by the Chrome button. Run it again any time to repair or upgrade.
 
-**Real Setup.exe:** double-click `build_setup.bat` once. It builds `Output\VideoDownloader-Setup.exe`, a normal installer you can copy to any Windows PC (no Python needed there). It installs PyInstaller and Inno Setup for the build.
+**Real Setup.exe:** double-click `build_setup.bat` once. It builds `Output\Uniloader-Setup.exe`, a normal installer you can copy to any Windows PC (no Python needed there). It installs PyInstaller and Inno Setup for the build.
 
 To remove: `uninstall.bat` for the quick install, or *Apps & features* for the Setup.exe install. Your downloaded files are never deleted.
 
@@ -14,9 +14,9 @@ To remove: `uninstall.bat` for the quick install, or *Apps & features* for the S
 
 1. Open `chrome://extensions` and turn on **Developer mode**
 2. **Load unpacked**, then choose the `chrome_extension` folder (Settings > Chrome button > *Open extension folder* shows it)
-3. Click the toolbar button, or right-click a page/link > **Video Downloader** > Download video / Download audio (MP3) / Download with options...
+3. Click the toolbar button, or right-click a page/link > **Uniloader** > Download video / Download audio (MP3) / Download with options...
 
-The first time, Chrome asks "Open Video Downloader?". Tick **Always allow**.
+The first time, Chrome asks "Open Uniloader?". Tick **Always allow**.
 
 **No extension?** Settings > *Copy bookmarklet*, then make a new bookmark and paste it as the URL. Clicking that bookmark on a video page does the same as the toolbar button.
 
@@ -31,4 +31,4 @@ The first time, Chrome asks "Open Video Downloader?". Tick **Always allow**.
 - **4K in MP4:** turn off *MP4: prefer H.264* in Settings, or pick MKV.
 - **Problems:** Settings > *Open log file*.
 
-Files: settings, history and queue live in `%APPDATA%\VideoDownloader`.
+Files: settings, history and queue live in `%APPDATA%\Uniloader`.

@@ -9,7 +9,7 @@ import zipfile
 
 from .paths import FROZEN, YTDLP_ZIP
 
-UA = {"User-Agent": "VideoDownloader"}
+UA = {"User-Agent": "Uniloader"}
 
 
 def current_version():

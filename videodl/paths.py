@@ -4,7 +4,7 @@ import shutil
 import sys
 from pathlib import Path
 
-APP_NAME = "Video Downloader"
+APP_NAME = "Uniloader"
 FROZEN = getattr(sys, "frozen", False)  # True inside the Setup.exe build
 
 # Folder that holds the app (and the ffmpeg/, deno/, chrome_extension/ folders)
@@ -22,13 +22,13 @@ def _data_dir():
         base = Path.home() / "Library" / "Application Support"
     else:
         base = Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config")
-    return base / "VideoDownloader"
+    return base / "Uniloader"
 
 
 DATA_DIR = _data_dir()
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 OLD_CONFIG = Path(os.environ.get("APPDATA", Path.home())) / "YTDownloader" / "config.json"
-DEFAULT_FOLDER = Path.home() / "Downloads" / "Video Downloader"
+DEFAULT_FOLDER = Path.home() / "Downloads" / "Uniloader"
 YTDLP_ZIP = DATA_DIR / "yt-dlp.zip"  # updated yt-dlp for the Setup.exe build
 
 EXE = ".exe" if os.name == "nt" else ""

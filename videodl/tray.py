@@ -15,19 +15,19 @@ class Tray:
             import pystray
             item = pystray.MenuItem
             menu = pystray.Menu(
-                item("Show Video Downloader", lambda: call_soon(on_show), default=True),
+                item("Show Uniloader", lambda: call_soon(on_show), default=True),
                 item("Download link from clipboard", lambda: call_soon(on_clipboard)),
                 item("Open downloads folder", lambda: call_soon(on_folder)),
                 pystray.Menu.SEPARATOR,
                 item("Quit", lambda: call_soon(on_quit)),
             )
-            self.icon = pystray.Icon("VideoDownloader", icon_image(64), "Video Downloader", menu)
+            self.icon = pystray.Icon("Uniloader", icon_image(64), "Uniloader", menu)
             self.icon.run_detached()
             self.ok = True
         except Exception:
             self.icon = None
 
-    def notify(self, message, title="Video Downloader"):
+    def notify(self, message, title="Uniloader"):
         if self.ok:
             try:
                 self.icon.notify(message[:250], title)

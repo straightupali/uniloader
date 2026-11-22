@@ -1,23 +1,23 @@
 param([Parameter(Mandatory)][string]$App)
 $py   = Join-Path $App 'venv\Scripts\pythonw.exe'
 $main = Join-Path $App 'ytdl.py'
-$ico  = Join-Path $App 'assets\VideoDownloader.ico'  # new name = Windows can't show a cached old icon
+$ico  = Join-Path $App 'assets\Uniloader.ico'  # new name = Windows can't show a cached old icon
 
 # ---- Desktop + Start menu shortcuts ----
 $shell = New-Object -ComObject WScript.Shell
 foreach ($dir in [Environment]::GetFolderPath('Desktop'), [Environment]::GetFolderPath('Programs')) {
     Remove-Item (Join-Path $dir 'YouTube Downloader.lnk') -ErrorAction SilentlyContinue  # first version
-    $lnk = $shell.CreateShortcut((Join-Path $dir 'Video Downloader.lnk'))
+    $lnk = $shell.CreateShortcut((Join-Path $dir 'Uniloader.lnk'))
     $lnk.TargetPath = $py
     $lnk.Arguments = '"' + $main + '"'
     $lnk.WorkingDirectory = $App
     $lnk.IconLocation = $ico
-    $lnk.Description = 'Video Downloader'
+    $lnk.Description = 'Uniloader'
     $lnk.Save()
 }
 
 # ---- taskbar: give the shortcuts the app's ID, so the running window uses this same icon ----
-$appId = 'VideoDownloader.App'   # must match ytdl.py
+$appId = 'Uniloader.App'   # must match ytdl.py
 try {
     Add-Type -TypeDefinition @'
 using System;
@@ -56,7 +56,7 @@ namespace VD {
 }
 '@
     foreach ($dir in [Environment]::GetFolderPath('Desktop'), [Environment]::GetFolderPath('Programs')) {
-        [VD.Shortcut]::SetAppId((Join-Path $dir 'Video Downloader.lnk'), $appId)
+        [VD.Shortcut]::SetAppId((Join-Path $dir 'Uniloader.lnk'), $appId)
     }
 } catch {
     Write-Host "      (couldn't set the taskbar ID: $($_.Exception.Message))"
@@ -65,7 +65,7 @@ namespace VD {
 # ---- ytdl:// link handler (used by the Chrome button) ----
 $root = 'HKCU:\Software\Classes\ytdl'
 New-Item $root -Force | Out-Null
-Set-ItemProperty $root -Name '(default)' -Value 'URL:Video Downloader'
+Set-ItemProperty $root -Name '(default)' -Value 'URL:Uniloader'
 New-ItemProperty $root -Name 'URL Protocol' -Value '' -Force | Out-Null
 New-Item "$root\DefaultIcon" -Force | Out-Null
 Set-ItemProperty "$root\DefaultIcon" -Name '(default)' -Value $ico
@@ -74,8 +74,8 @@ Set-ItemProperty "$root\shell\open\command" -Name '(default)' -Value ('"{0}" "{1
 
 # ---- keep "Start with Windows" pointing at this install ----
 $run = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run'
-if (Get-ItemProperty $run -Name 'VideoDownloader' -ErrorAction SilentlyContinue) {
-    Set-ItemProperty $run -Name 'VideoDownloader' -Value ('"{0}" "{1}" "--tray"' -f $py, $main)
+if (Get-ItemProperty $run -Name 'Uniloader' -ErrorAction SilentlyContinue) {
+    Set-ItemProperty $run -Name 'Uniloader' -Value ('"{0}" "{1}" "--tray"' -f $py, $main)
 }
 
 # ---- refresh Windows' icon cache so the new icon shows right away ----

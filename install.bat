@@ -1,11 +1,11 @@
 @echo off
 setlocal
-title Video Downloader - Installer
-set "APP=%LOCALAPPDATA%\VideoDownloader"
+title Uniloader - Installer
+set "APP=%LOCALAPPDATA%\Uniloader"
 set "OLD=%LOCALAPPDATA%\YTDownloader"
 
 echo ==========================================
-echo   Video Downloader 2.3.2 - Installer
+echo   Uniloader 2.3.2 - Installer
 echo ==========================================
 echo Install folder: %APP%
 echo If the app is running, quit it first (tray icon, right-click, Quit).
@@ -49,7 +49,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0make_shortcut.ps1" -Ap
 
 echo.
 echo ==========================================
-echo Done! Open "Video Downloader" from your Desktop or Start menu.
+echo Done! Open "Uniloader" from your Desktop or Start menu.
 echo.
 echo Chrome button: open chrome://extensions, turn on Developer mode,
 echo click "Load unpacked" and choose:

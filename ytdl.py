@@ -1,4 +1,4 @@
-"""Video Downloader - start here.
+"""Uniloader - start here.
 
   ytdl.py                       open the window
   ytdl.py <url | ytdl://...>    add a link (used by the Chrome button)
@@ -50,7 +50,7 @@ def main():
     if os.name == "nt":  # own taskbar identity: shows our icon instead of Python's
         try:
             import ctypes
-            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("VideoDownloader.App")
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("Uniloader.App")
         except Exception:
             pass
 

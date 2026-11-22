@@ -1,4 +1,4 @@
-// Sends links to the Video Downloader desktop app through its ytdl:// link handler.
+// Sends links to the Uniloader desktop app through its ytdl:// link handler.
 // The extension collects no data and talks to no server.
 
 const CONTEXTS = ["page", "link", "video", "audio"];
@@ -21,7 +21,7 @@ chrome.action.onClicked.addListener((tab) => send(tab.id, tab.url, ""));
 // Right-click menu
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.removeAll(() => {
-    chrome.contextMenus.create({ id: "root", title: "Video Downloader", contexts: CONTEXTS });
+    chrome.contextMenus.create({ id: "root", title: "Uniloader", contexts: CONTEXTS });
     for (const m of MENU) {
       chrome.contextMenus.create({ id: m.id, parentId: "root", title: m.title, contexts: CONTEXTS });
     }
