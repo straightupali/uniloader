@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+venv/
+build_env/
+build/
+dist/
+Output/
+*.spec
+ffmpeg/
+deno/
+aria2/
